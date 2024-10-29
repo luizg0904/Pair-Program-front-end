@@ -3,11 +3,16 @@ import { Image, StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'rea
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 // Componente de Dashboard que contém navegação para outras partes do app
-const Dashboard = ({ navigation }) => {
+const Dashboard = ({ navigation, setIsAuthenticated }) => {
   const [showLogout, setShowLogout] = useState(false);
 
   const toggleLogoutMenu = () => {
     setShowLogout(!showLogout);
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false); // Atualiza o estado de autenticação
+    navigation.navigate('Login'); // Navega para a tela de Login
   };
 
   return (
@@ -65,7 +70,7 @@ const Dashboard = ({ navigation }) => {
           {showLogout && (
             <TouchableOpacity
               style={styles.logoutButton}
-              onPress={() => navigation.navigate('Login')}
+              onPress={handleLogout} // Chama a função handleLogout
             >
               <Text style={styles.logoutText}>Sair</Text>
             </TouchableOpacity>
@@ -204,11 +209,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     borderRadius: 8,
     backgroundColor: '#fff',
-  },
-
-  sidebarText: {
-    fontSize: 16,
-    color: '#000',
   },
 
   footer: {

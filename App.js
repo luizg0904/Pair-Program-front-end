@@ -25,23 +25,33 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login">
-          {props => <Login {...props} setIsAuthenticated={setIsAuthenticated} />}
-        </Stack.Screen>
-        <Stack.Screen name="Dashboard" component={Dashboard} />
-        <Stack.Screen name="ControleDeProducao" component={ControleDeProducao} />
-        <Stack.Screen name="GestaoDeEstoque" component={GestaoDeEstoque} />
-        <Stack.Screen name="GestaoDeVendas" component={GestaoDeVendas} />
-        <Stack.Screen name="Cultivo" component={Cultivo} />  
-        <Stack.Screen name="EstoqueDeProdutos" component={EstoqueDeProdutos} />
-        <Stack.Screen name="GestaoDeClientes" component={GestaoDeClientes} /> 
-        <Stack.Screen name="RegistroDeVendas" component={RegistroDeVendas} /> 
-        <Stack.Screen name="Colheita" component={Colheita} />
-        <Stack.Screen name="Irrigacao" component={Irrigacao} />
-        <Stack.Screen name="ControleTemperatura" component={ControleTemperatura} />
-        <Stack.Screen name="EstoqueProdutosAgricolas" component={EstoqueProdutosAgricolas} />
-        <Stack.Screen name="MovimentacaoEstoque" component={MovimentacaoEstoque} />
-        <Stack.Screen name="GestaoArmazenamento" component={GestaoArmazenamento} />
+        {isAuthenticated ? (
+          // Tela inicial após login bem-sucedido
+          <>
+            <Stack.Screen name="Dashboard">{props => <Dashboard {...props} setIsAuthenticated={setIsAuthenticated}/>}</Stack.Screen>
+            <Stack.Screen name="ControleDeProducao" component={ControleDeProducao} />
+            <Stack.Screen name="GestaoDeEstoque" component={GestaoDeEstoque} />
+            <Stack.Screen name="GestaoDeVendas" component={GestaoDeVendas} />
+            <Stack.Screen name="Cultivo" component={Cultivo} />  
+            <Stack.Screen name="EstoqueDeProdutos" component={EstoqueDeProdutos} />
+            <Stack.Screen name="GestaoDeClientes" component={GestaoDeClientes} /> 
+            <Stack.Screen name="RegistroDeVendas" component={RegistroDeVendas} /> 
+            <Stack.Screen name="Colheita" component={Colheita} />
+            <Stack.Screen name="Irrigacao" component={Irrigacao} />
+            <Stack.Screen name="ControleTemperatura" component={ControleTemperatura} />
+            <Stack.Screen name="EstoqueProdutosAgricolas" component={EstoqueProdutosAgricolas} />
+            <Stack.Screen name="MovimentacaoEstoque" component={MovimentacaoEstoque} />
+            <Stack.Screen name="GestaoArmazenamento" component={GestaoArmazenamento} />
+          </>
+        ) : (
+          // Tela de Login
+          <Stack.Screen name="Login">
+            {props => <Login {...props} setIsAuthenticated={setIsAuthenticated} />}
+          </Stack.Screen>
+        )}
+
+        
+
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Image, View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
 
 // Componente de Login
-const Login = ({ navigation }) => {
+const Login = ({ navigation, setIsAuthenticated }) => {
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
 
@@ -29,6 +29,7 @@ const Login = ({ navigation }) => {
   
       if (response.ok) {
         Alert.alert("Sucesso", data.message);
+        setIsAuthenticated(true); // Atualiza o estado para autenticado
         navigation.navigate('Dashboard');  // Navega para a tela Dashboard após login bem-sucedido
       } else {
         console.log('Erro de login:', data); // Registra a resposta de erro
@@ -39,7 +40,6 @@ const Login = ({ navigation }) => {
       Alert.alert("Erro", "Ocorreu um erro ao tentar fazer login.");
     }
   };
-  
 
   return (
     <View style={styles.container}>
